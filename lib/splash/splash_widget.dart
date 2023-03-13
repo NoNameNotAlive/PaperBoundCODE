@@ -58,6 +58,7 @@ class _SplashWidgetState extends State<SplashWidget> {
           onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
           child: Column(
             mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0.0, 230.0, 0.0, 0.0),

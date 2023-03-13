@@ -37,7 +37,7 @@ class _PaymentConfirmWidgetState extends State<PaymentConfirmWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      backgroundColor: Colors.white,
+      backgroundColor: Color(0xFFF1F4F8),
       body: SafeArea(
         child: Column(
           mainAxisSize: MainAxisSize.max,

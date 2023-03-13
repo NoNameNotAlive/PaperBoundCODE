@@ -40,7 +40,7 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      backgroundColor: Colors.white,
+      backgroundColor: Color(0xFFF1F4F8),
       appBar: AppBar(
         backgroundColor: Color(0xFFB4FFA8),
         automaticallyImplyLeading: false,
@@ -125,6 +125,7 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
                     'Encuentra tu siguiente historia.',
                     style: FlutterFlowTheme.of(context).bodyText1.override(
                           fontFamily: 'Poppins',
+                          color: FlutterFlowTheme.of(context).black600,
                           fontSize: 25.0,
                         ),
                   ),

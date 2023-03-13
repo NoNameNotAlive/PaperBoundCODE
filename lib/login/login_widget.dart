@@ -67,6 +67,7 @@ class _LoginWidgetState extends State<LoginWidget> {
       ),
       body: Column(
         mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Image.asset(
             'assets/images/image.png',
