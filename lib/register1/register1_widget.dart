@@ -43,7 +43,7 @@ class _Register1WidgetState extends State<Register1Widget> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      backgroundColor: Colors.white,
+      backgroundColor: Color(0xFFF1F4F8),
       appBar: AppBar(
         backgroundColor: Color(0xFFF1F4F8),
         automaticallyImplyLeading: false,
@@ -67,6 +67,8 @@ class _Register1WidgetState extends State<Register1Widget> {
       ),
       body: Column(
         mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Image.asset(
             'assets/images/image.png',
