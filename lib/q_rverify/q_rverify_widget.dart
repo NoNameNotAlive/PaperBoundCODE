@@ -1,7 +1,7 @@
-import '/categories/categories_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/user_config/user_config_widget.dart';
 import 'package:barcode_widget/barcode_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -59,7 +59,7 @@ class _QRverifyWidgetState extends State<QRverifyWidget> {
             await Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => CategoriesWidget(),
+                builder: (context) => UserConfigWidget(),
               ),
             );
           },

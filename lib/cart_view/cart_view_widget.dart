@@ -2,7 +2,7 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/payment_modal/payment_modal_widget.dart';
+import '/mapa/mapa_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -326,7 +326,7 @@ class _CartViewWidgetState extends State<CartViewWidget> {
                   await Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => PaymentModalWidget(),
+                      builder: (context) => MapaWidget(),
                     ),
                   );
                 },
@@ -344,7 +344,7 @@ class _CartViewWidgetState extends State<CartViewWidget> {
                   color: Color(0xFFB4FFA8),
                   textStyle: FlutterFlowTheme.of(context).subtitle2.override(
                         fontFamily: 'Poppins',
-                        color: Colors.white,
+                        color: FlutterFlowTheme.of(context).black600,
                       ),
                   borderSide: BorderSide(
                     color: Colors.transparent,

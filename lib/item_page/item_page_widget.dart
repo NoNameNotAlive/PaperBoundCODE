@@ -153,8 +153,7 @@ class _ItemPageWidgetState extends State<ItemPageWidget> {
                         width: 100.0,
                         height: 230.0,
                         decoration: BoxDecoration(
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
+                          color: Color(0xFFF1F4F8),
                         ),
                         child: Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
@@ -169,8 +168,13 @@ class _ItemPageWidgetState extends State<ItemPageWidget> {
                                   child: Text(
                                     'Una sinopsis otorga al lector o espectador un extracto de los aspectos más relevantes del asunto y le forma una visión general de una manera resumida y adecuada. La sinopsis por lo general no incluye una visión crítica del tema, sino que tiene como objetivo informar. Puede ser utilizada en trabajos e informes no funcionales, así también como en obras de ficción y creaciones multimedia.3​ También son usadas para resumir películas, obras de teatro o para las introducciones de los libros. Suelen ser encontradas al reverso de las películas, invitando al lector a comprarlos.4​ Las propias productoras de cine y televisión realizan avances, que son piezas cortas de pocos minutos o segundos de duración que presentan una sinopsis de la obra a estrenar como mera estrategia publicitaria.',
                                     textAlign: TextAlign.justify,
-                                    style:
-                                        FlutterFlowTheme.of(context).bodyText1,
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyText1
+                                        .override(
+                                          fontFamily: 'Poppins',
+                                          color: FlutterFlowTheme.of(context)
+                                              .black600,
+                                        ),
                                   ),
                                 ),
                               ],
