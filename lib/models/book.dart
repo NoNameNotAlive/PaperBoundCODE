@@ -26,3 +26,18 @@ class Book {
     );
   }
 }
+
+class Books {
+  List<Book> books = [];
+
+  Books();
+
+  Books.fromJsonList(List<dynamic> jsonList) {
+    if (jsonList == null) return;
+
+    for (var item in jsonList) {
+      final book = new Book.fromJson(item);
+      books.add(book);
+    }
+  }
+}
