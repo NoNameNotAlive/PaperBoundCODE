@@ -3,6 +3,9 @@ import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../item_page/item_page_widget.dart';
+import '../../provider/BookProvider.dart';
+import '../../models/book.dart';
+import '../../widgets/file_card.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -10,7 +13,9 @@ import 'filtrado_libros_categorias_model.dart';
 export 'filtrado_libros_categorias_model.dart';
 
 class FiltradoLibrosCategoriasWidget extends StatefulWidget {
-  const FiltradoLibrosCategoriasWidget({Key? key}) : super(key: key);
+  final String genre;
+  const FiltradoLibrosCategoriasWidget({Key? key, required this.genre})
+      : super(key: key);
 
   @override
   _FiltradoLibrosCategoriasWidgetState createState() =>
@@ -21,7 +26,14 @@ class _FiltradoLibrosCategoriasWidgetState
     extends State<FiltradoLibrosCategoriasWidget> {
   late FiltradoLibrosCategoriasModel _model;
 
+  final BookProvider bookProvider = new BookProvider();
+  late List<Book> bookList;
+
   final scaffoldKey = GlobalKey<ScaffoldState>();
+
+  Future<void> loadBooks() async {
+    bookList = await bookProvider.getBooksByGenre(widget.genre);
+  }
 
   @override
   void initState() {
@@ -40,6 +52,8 @@ class _FiltradoLibrosCategoriasWidgetState
 
   @override
   Widget build(BuildContext context) {
+    loadBooks();
+
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -204,107 +218,11 @@ class _FiltradoLibrosCategoriasWidgetState
                       ),
                       child: Stack(
                         children: [
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                10.0, 10.0, 10.0, 10.0),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Align(
-                                  alignment: AlignmentDirectional(-0.8, 0.19),
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(10.0),
-                                    child: Image.network(
-                                      'https://picsum.photos/seed/512/600',
-                                      width: 100.0,
-                                      height: double.infinity,
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        10.0, 0.0, 0.0, 0.0),
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.stretch,
-                                      children: [
-                                        Align(
-                                          alignment:
-                                              AlignmentDirectional(0.0, -0.66),
-                                          child: Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    10.0, 10.0, 10.0, 10.0),
-                                            child: Text(
-                                              'TRENZA DEL MAR ESMERALDA',
-                                              maxLines: 2,
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyText1
-                                                      .override(
-                                                        fontFamily: 'Poppins',
-                                                        color: Colors.black,
-                                                        fontSize: 20.0,
-                                                      ),
-                                            ),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  10.0, 0.0, 0.0, 0.0),
-                                          child: Text(
-                                            'BRANDON SANDERSON',
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyText1
-                                                .override(
-                                                  fontFamily: 'Poppins',
-                                                  color: Colors.black,
-                                                ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Align(
-                            alignment: AlignmentDirectional(1.0, 1.01),
-                            child: Container(
-                              width: 70.0,
-                              height: 80.0,
-                              decoration: BoxDecoration(
-                                color: Color(0xFF86CE7A),
-                                borderRadius: BorderRadius.only(
-                                  bottomLeft: Radius.circular(0.0),
-                                  bottomRight: Radius.circular(200.0),
-                                  topLeft: Radius.circular(0.0),
-                                  topRight: Radius.circular(0.0),
-                                ),
-                              ),
-                              child: Align(
-                                alignment: AlignmentDirectional(0.0, 0.0),
-                                child: Text(
-                                  '16%',
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyText1
-                                      .override(
-                                        fontFamily: 'Poppins',
-                                        color: Colors.white,
-                                        fontSize: 20.0,
-                                      ),
-                                ),
-                              ),
-                            ),
-                          ),
+                          ListView.builder(
+                              itemCount: bookList.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                return BookCard(book: bookList[index]);
+                              })
                         ],
                       ),
                     ),

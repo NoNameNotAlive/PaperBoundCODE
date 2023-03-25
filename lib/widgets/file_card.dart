@@ -4,10 +4,10 @@ import '../pages/flutter_flow/flutter_flow_icon_button.dart';
 import '../pages/flutter_flow/flutter_flow_theme.dart';
 import '../pages/flutter_flow/flutter_flow_util.dart';
 
-class ModeloWidget extends StatelessWidget {
+class BookCard extends StatelessWidget {
   final Book book;
 
-  ModeloWidget({required this.book});
+  BookCard({required this.book});
 
   @override
   Widget build(BuildContext context) {
