@@ -20,7 +20,7 @@ class Book {
       title: json['titol'],
       author: json['nomAutor'],
       imgUrl: json['urlImatge'],
-      synopsis: json['sinopsi '],
+      synopsis: json['sinopsi'],
       sale: json['descompte'],
       price: json['preuTotal'],
     );

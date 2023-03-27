@@ -27,7 +27,7 @@ class _FiltradoLibrosCategoriasWidgetState
   late FiltradoLibrosCategoriasModel _model;
 
   final BookProvider bookProvider = new BookProvider();
-  late List<Book> bookList;
+  late List<Book> bookList = [];
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -38,6 +38,7 @@ class _FiltradoLibrosCategoriasWidgetState
   @override
   void initState() {
     super.initState();
+    loadBooks();
     _model = createModel(context, () => FiltradoLibrosCategoriasModel());
 
     _model.textController ??= TextEditingController();
@@ -52,8 +53,6 @@ class _FiltradoLibrosCategoriasWidgetState
 
   @override
   Widget build(BuildContext context) {
-    loadBooks();
-
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -164,7 +163,7 @@ class _FiltradoLibrosCategoriasWidgetState
                   ),
                 ),
                 Text(
-                  'Ficción',
+                  widget.genre,
                   style: FlutterFlowTheme.of(context).bodyText1.override(
                         fontFamily: 'Poppins',
                         fontSize: 15.0,
@@ -182,51 +181,17 @@ class _FiltradoLibrosCategoriasWidgetState
                 Padding(
                   padding:
                       EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 16.0, 20.0),
-                  child: InkWell(
-                    onTap: () async {
-                      await Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ItemPageWidget(),
+                  child: bookList.isEmpty
+                      ? Center(child: Text('No hay libros disponibles'))
+                      : Stack(
+                          children: [
+                            ListView.builder(
+                                itemCount: bookList.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return BookCard(book: bookList[index]);
+                                })
+                          ],
                         ),
-                      );
-                    },
-                    child: Container(
-                      width: double.infinity,
-                      height: 200.0,
-                      decoration: BoxDecoration(
-                        color: Color(0xFFEDE7E7),
-                        image: DecorationImage(
-                          fit: BoxFit.fitWidth,
-                          image: Image.network(
-                            '',
-                          ).image,
-                        ),
-                        boxShadow: [
-                          BoxShadow(
-                            blurRadius: 3.0,
-                            color: Color(0x33000000),
-                            offset: Offset(0.0, 2.0),
-                          )
-                        ],
-                        borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(10.0),
-                          bottomRight: Radius.circular(70.0),
-                          topLeft: Radius.circular(10.0),
-                          topRight: Radius.circular(10.0),
-                        ),
-                      ),
-                      child: Stack(
-                        children: [
-                          ListView.builder(
-                              itemCount: bookList.length,
-                              itemBuilder: (BuildContext context, int index) {
-                                return BookCard(book: bookList[index]);
-                              })
-                        ],
-                      ),
-                    ),
-                  ),
                 ),
               ],
             ),

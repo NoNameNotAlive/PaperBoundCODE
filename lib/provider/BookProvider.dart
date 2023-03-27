@@ -6,10 +6,13 @@ import 'package:flutter/foundation.dart';
 import '../models/book.dart';
 
 class BookProvider {
-  String _url = 'https://localhost:7178/api';
+  // Flutter no coincibe localhost, con lo que he utilizado ngrok
+  String _url = 'https://1ad5-80-29-126-239.eu.ngrok.io/api';
 
   Future<List<Book>> _processResponse(Uri url) async {
-    final resp = await http.get(url);
+    // ngrok tiene una pagina de aviso antes de entrar, para eliminarlo tengo que añadirle un header al Get
+    final resp =
+        await http.get(url, headers: {"ngrok-skip-browser-warning": "69420"});
     final decodedData = json.decode(resp.body);
 
     final dataBooks = new Books.fromJsonList(decodedData);
@@ -18,9 +21,9 @@ class BookProvider {
   }
 
   Future<List<Book>> getBooksByGenre(String genre) async {
-    final url = Uri.https(_url, '/Llibres/' + genre);
+    final url = Uri.parse(_url + '/Llibres/' + genre);
 
-    debugPrint('movieTitle: $url');
+    debugPrint('url: $url');
     return await _processResponse(url);
   }
 }
