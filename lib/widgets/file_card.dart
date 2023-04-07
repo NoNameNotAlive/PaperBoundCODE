@@ -12,16 +12,53 @@ class BookCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () async {
+    return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Image.network(
+            book.imgUrl,
+            width: 100,
+            height: 150,
+          ),
+          SizedBox(width: 10),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  book.title,
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(height: 5),
+                Text(
+                  book.author,
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.grey,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+    /*onTap: () async {
         await Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) => ItemPageWidget(),
           ),
         );
-      },
-      child: Container(
+      },*/
+    /*child: Container(
         width: double.infinity,
         height: 200.0,
         decoration: BoxDecoration(
@@ -143,7 +180,6 @@ class BookCard extends StatelessWidget {
             ),
           ]),
         ),
-      ),
-    );
+      ),*/
   }
 }

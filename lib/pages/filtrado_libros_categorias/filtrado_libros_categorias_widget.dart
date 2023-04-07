@@ -31,14 +31,9 @@ class _FiltradoLibrosCategoriasWidgetState
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
-  Future<void> loadBooks() async {
-    bookList = await bookProvider.getBooksByGenre(widget.genre);
-  }
-
   @override
   void initState() {
     super.initState();
-    loadBooks();
     _model = createModel(context, () => FiltradoLibrosCategoriasModel());
 
     _model.textController ??= TextEditingController();
@@ -53,151 +48,166 @@ class _FiltradoLibrosCategoriasWidgetState
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: scaffoldKey,
-      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-      appBar: AppBar(
-        backgroundColor: Color(0xFFB4FFA8),
-        automaticallyImplyLeading: true,
-        title: TextFormField(
-          controller: _model.textController,
-          autofocus: true,
-          obscureText: false,
-          decoration: InputDecoration(
-            hintText: 'Buscar Libro...',
-            hintStyle: FlutterFlowTheme.of(context).bodyText2,
-            enabledBorder: UnderlineInputBorder(
-              borderSide: BorderSide(
-                color: Color(0x00000000),
-                width: 1.0,
-              ),
-              borderRadius: BorderRadius.circular(10.0),
-            ),
-            focusedBorder: UnderlineInputBorder(
-              borderSide: BorderSide(
-                color: Color(0x00000000),
-                width: 1.0,
-              ),
-              borderRadius: BorderRadius.circular(10.0),
-            ),
-            errorBorder: UnderlineInputBorder(
-              borderSide: BorderSide(
-                color: Color(0x00000000),
-                width: 1.0,
-              ),
-              borderRadius: BorderRadius.circular(10.0),
-            ),
-            focusedErrorBorder: UnderlineInputBorder(
-              borderSide: BorderSide(
-                color: Color(0x00000000),
-                width: 1.0,
-              ),
-              borderRadius: BorderRadius.circular(10.0),
-            ),
-            filled: true,
-            fillColor: Color(0x9EE0E3E7),
-          ),
-          style: FlutterFlowTheme.of(context).bodyText1,
-          validator: _model.textControllerValidator.asValidator(context),
-        ),
-        actions: [
-          FlutterFlowIconButton(
-            borderColor: Colors.transparent,
-            borderRadius: 30.0,
-            borderWidth: 1.0,
-            buttonSize: 60.0,
-            icon: Icon(
-              Icons.shopping_cart_sharp,
-              color: Colors.black,
-              size: 30.0,
-            ),
-            onPressed: () async {
-              await Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => CartViewWidget(),
+    return FutureBuilder<List<Book>>(
+      future: bookProvider.getBooksByGenre(widget.genre),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          final books = snapshot.data;
+          return Scaffold(
+            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+            appBar: AppBar(
+              backgroundColor: Color(0xFFB4FFA8),
+              automaticallyImplyLeading: true,
+              title: TextFormField(
+                controller: _model.textController,
+                autofocus: true,
+                obscureText: false,
+                decoration: InputDecoration(
+                  hintText: 'Buscar Libro...',
+                  hintStyle: FlutterFlowTheme.of(context).bodyText2,
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Color(0x00000000),
+                      width: 1.0,
+                    ),
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Color(0x00000000),
+                      width: 1.0,
+                    ),
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  errorBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Color(0x00000000),
+                      width: 1.0,
+                    ),
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  focusedErrorBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Color(0x00000000),
+                      width: 1.0,
+                    ),
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  filled: true,
+                  fillColor: Color(0x9EE0E3E7),
                 ),
-              );
-            },
-          ),
-        ],
-        centerTitle: true,
-        toolbarHeight: 100.0,
-        elevation: 4.0,
-      ),
-      body: Column(
-        mainAxisSize: MainAxisSize.max,
-        children: [
-          Container(
-            width: MediaQuery.of(context).size.width * 1.0,
-            height: 100.0,
-            decoration: BoxDecoration(
-              color: FlutterFlowTheme.of(context).secondaryBackground,
-            ),
-            child: Row(
-              mainAxisSize: MainAxisSize.max,
-              children: [
+                style: FlutterFlowTheme.of(context).bodyText1,
+                validator: _model.textControllerValidator.asValidator(context),
+              ),
+              actions: [
                 FlutterFlowIconButton(
                   borderColor: Colors.transparent,
                   borderRadius: 30.0,
                   borderWidth: 1.0,
                   buttonSize: 60.0,
                   icon: Icon(
-                    Icons.filter_alt,
-                    color: FlutterFlowTheme.of(context).primaryText,
+                    Icons.shopping_cart_sharp,
+                    color: Colors.black,
                     size: 30.0,
                   ),
-                  onPressed: () {
-                    print('IconButton pressed ...');
+                  onPressed: () async {
+                    await Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => CartViewWidget(),
+                      ),
+                    );
                   },
                 ),
-                Padding(
-                  padding:
-                      EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 10.0, 10.0),
-                  child: Text(
-                    'Filtrado por: ',
-                    style: FlutterFlowTheme.of(context).bodyText1.override(
-                          fontFamily: 'Poppins',
-                          fontSize: 15.0,
+              ],
+              centerTitle: true,
+              toolbarHeight: 100.0,
+              elevation: 4.0,
+            ),
+            body: Column(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Container(
+                  width: MediaQuery.of(context).size.width * 1.0,
+                  height: 100.0,
+                  decoration: BoxDecoration(
+                    color: FlutterFlowTheme.of(context).secondaryBackground,
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      FlutterFlowIconButton(
+                        borderColor: Colors.transparent,
+                        borderRadius: 30.0,
+                        borderWidth: 1.0,
+                        buttonSize: 60.0,
+                        icon: Icon(
+                          Icons.filter_alt,
+                          color: FlutterFlowTheme.of(context).primaryText,
+                          size: 30.0,
                         ),
+                        onPressed: () {
+                          print('IconButton pressed ...');
+                        },
+                      ),
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            10.0, 10.0, 10.0, 10.0),
+                        child: Text(
+                          'Filtrado por: ',
+                          style:
+                              FlutterFlowTheme.of(context).bodyText1.override(
+                                    fontFamily: 'Poppins',
+                                    fontSize: 15.0,
+                                  ),
+                        ),
+                      ),
+                      Text(
+                        widget.genre,
+                        style: FlutterFlowTheme.of(context).bodyText1.override(
+                              fontFamily: 'Poppins',
+                              fontSize: 15.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                      ),
+                    ],
                   ),
                 ),
-                Text(
-                  widget.genre,
-                  style: FlutterFlowTheme.of(context).bodyText1.override(
-                        fontFamily: 'Poppins',
-                        fontSize: 15.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                ),
-              ],
-            ),
-          ),
-          Expanded(
-            child: ListView(
-              padding: EdgeInsets.zero,
-              scrollDirection: Axis.vertical,
-              children: [
-                Padding(
-                  padding:
-                      EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 16.0, 20.0),
-                  child: bookList.isEmpty
-                      ? Center(child: Text('No hay libros disponibles'))
-                      : Stack(
+                Stack(
+                  children: [
+                    Positioned(
+                      top: 100,
+                      left: 0,
+                      right: 0,
+                      bottom: 0,
+                      child: SingleChildScrollView(
+                        child: Column(
                           children: [
-                            ListView.builder(
-                                itemCount: bookList.length,
+                            if (books == null)
+                              Center(
+                                child: Text('No hay libros disponibles'),
+                              )
+                            else
+                              ListView.builder(
+                                shrinkWrap: true,
+                                itemCount: books.length,
                                 itemBuilder: (BuildContext context, int index) {
-                                  return BookCard(book: bookList[index]);
-                                })
+                                  return BookCard(book: books[index]);
+                                },
+                              ),
                           ],
                         ),
-                ),
+                      ),
+                    )
+                  ],
+                )
               ],
             ),
-          ),
-        ],
-      ),
+          );
+        }
+
+        return CircularProgressIndicator();
+      },
     );
   }
 }
