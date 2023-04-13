@@ -7,7 +7,7 @@ import '../models/book.dart';
 
 class BookProvider {
   // Flutter no coincibe localhost, con lo que he utilizado ngrok
-  String _url = 'https://c197-80-29-126-239.eu.ngrok.io/api';
+  String _url = 'https://1984-80-29-126-239.ngrok-free.app/api';
 
   Future<List<Book>> _processResponse(Uri url) async {
     // ngrok tiene una pagina de aviso antes de entrar, para eliminarlo tengo que añadirle un header al Get

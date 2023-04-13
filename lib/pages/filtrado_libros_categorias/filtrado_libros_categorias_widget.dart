@@ -124,84 +124,76 @@ class _FiltradoLibrosCategoriasWidgetState
               toolbarHeight: 100.0,
               elevation: 4.0,
             ),
-            body: Column(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Container(
-                  width: MediaQuery.of(context).size.width * 1.0,
-                  height: 100.0,
-                  decoration: BoxDecoration(
-                    color: FlutterFlowTheme.of(context).secondaryBackground,
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      FlutterFlowIconButton(
-                        borderColor: Colors.transparent,
-                        borderRadius: 30.0,
-                        borderWidth: 1.0,
-                        buttonSize: 60.0,
-                        icon: Icon(
-                          Icons.filter_alt,
-                          color: FlutterFlowTheme.of(context).primaryText,
-                          size: 30.0,
+            body: Container(
+              padding: EdgeInsets.only(bottom: 40),
+              child: Column(
+                children: [
+                  Container(
+                    padding: EdgeInsets.only(bottom: 30),
+                    width: MediaQuery.of(context).size.width * 1.0,
+                    height: 100.0,
+                    decoration: BoxDecoration(
+                      color: FlutterFlowTheme.of(context).secondaryBackground,
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        FlutterFlowIconButton(
+                          borderColor: Colors.transparent,
+                          borderRadius: 30.0,
+                          borderWidth: 1.0,
+                          buttonSize: 60.0,
+                          icon: Icon(
+                            Icons.filter_alt,
+                            color: FlutterFlowTheme.of(context).primaryText,
+                            size: 30.0,
+                          ),
+                          onPressed: () {
+                            print('IconButton pressed ...');
+                          },
                         ),
-                        onPressed: () {
-                          print('IconButton pressed ...');
-                        },
-                      ),
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            10.0, 10.0, 10.0, 10.0),
-                        child: Text(
-                          'Filtrado por: ',
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              10.0, 10.0, 10.0, 10.0),
+                          child: Text(
+                            'Filtrado por: ',
+                            style:
+                                FlutterFlowTheme.of(context).bodyText1.override(
+                                      fontFamily: 'Poppins',
+                                      fontSize: 15.0,
+                                    ),
+                          ),
+                        ),
+                        Text(
+                          widget.genre,
                           style:
                               FlutterFlowTheme.of(context).bodyText1.override(
                                     fontFamily: 'Poppins',
                                     fontSize: 15.0,
+                                    fontWeight: FontWeight.bold,
                                   ),
                         ),
-                      ),
-                      Text(
-                        widget.genre,
-                        style: FlutterFlowTheme.of(context).bodyText1.override(
-                              fontFamily: 'Poppins',
-                              fontSize: 15.0,
-                              fontWeight: FontWeight.bold,
-                            ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-                Stack(
-                  children: [
-                    Positioned(
-                      top: 100,
-                      left: 0,
-                      right: 0,
-                      bottom: 0,
-                      child: SingleChildScrollView(
-                        child: Column(
-                          children: [
-                            if (books == null)
-                              Center(
-                                child: Text('No hay libros disponibles'),
-                              )
-                            else
-                              ListView.builder(
-                                shrinkWrap: true,
-                                itemCount: books.length,
-                                itemBuilder: (BuildContext context, int index) {
-                                  return BookCard(book: books[index]);
-                                },
-                              ),
-                          ],
-                        ),
-                      ),
+                  if (books == null)
+                    Center(
+                      child: Text('No hay libros disponibles'),
                     )
-                  ],
-                )
-              ],
+                  else
+                    SingleChildScrollView(
+                        child: Padding(
+                      padding: EdgeInsets.only(bottom: 20),
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: books.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return BookCard(book: books[index]);
+                        },
+                      ),
+                    ))
+                ],
+              ),
             ),
           );
         }
