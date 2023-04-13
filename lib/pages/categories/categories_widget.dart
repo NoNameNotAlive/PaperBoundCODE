@@ -169,7 +169,8 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) =>
-                                    FiltradoLibrosCategoriasWidget(),
+                                    FiltradoLibrosCategoriasWidget(
+                                        genre: "Ficción"),
                               ),
                             );
                           },
