@@ -1,3 +1,4 @@
+import '../../models/book.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -10,7 +11,8 @@ import 'item_page_model.dart';
 export 'item_page_model.dart';
 
 class ItemPageWidget extends StatefulWidget {
-  const ItemPageWidget({Key? key}) : super(key: key);
+  final Book book;
+  const ItemPageWidget({Key? key, required this.book}) : super(key: key);
 
   @override
   _ItemPageWidgetState createState() => _ItemPageWidgetState();
@@ -38,9 +40,9 @@ class _ItemPageWidgetState extends State<ItemPageWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      backgroundColor: Color(0xFFF1F4F8),
+      backgroundColor: Color.fromARGB(255, 255, 255, 255),
       appBar: AppBar(
-        backgroundColor: Color(0xFFF1F4F8),
+        backgroundColor: Color.fromARGB(255, 255, 255, 255),
         automaticallyImplyLeading: false,
         leading: FlutterFlowIconButton(
           borderColor: Colors.transparent,
@@ -82,15 +84,18 @@ class _ItemPageWidgetState extends State<ItemPageWidget> {
                       child: Stack(
                         children: [
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                20.0, 20.0, 20.0, 20.0),
-                            child: Image.asset(
-                              'assets/images/john-arano-h4i9G-de7Po-unsplash.jpg',
-                              width: MediaQuery.of(context).size.width * 1.411,
-                              height: 369.2,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  20.0, 20.0, 20.0, 20.0),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(16.0),
+                                child: Image.network(
+                                  widget.book.imgUrl,
+                                  width:
+                                      MediaQuery.of(context).size.width * 1.411,
+                                  height: 369.2,
+                                  fit: BoxFit.contain,
+                                ),
+                              )),
                           Align(
                             alignment: AlignmentDirectional(1.01, 1.01),
                             child: Container(
@@ -108,7 +113,7 @@ class _ItemPageWidgetState extends State<ItemPageWidget> {
                               child: Align(
                                 alignment: AlignmentDirectional(0.0, 0.0),
                                 child: Text(
-                                  '16%',
+                                  widget.book.sale.toString() + "%",
                                   style: FlutterFlowTheme.of(context)
                                       .bodyText1
                                       .override(
@@ -133,7 +138,7 @@ class _ItemPageWidgetState extends State<ItemPageWidget> {
                 children: [
                   Expanded(
                     child: Text(
-                      'Class Name',
+                      widget.book.title,
                       style: FlutterFlowTheme.of(context).title2,
                     ),
                   ),
@@ -153,31 +158,47 @@ class _ItemPageWidgetState extends State<ItemPageWidget> {
                         width: 100.0,
                         height: 230.0,
                         decoration: BoxDecoration(
-                          color: Color(0xFFF1F4F8),
+                          color: Color.fromARGB(255, 255, 255, 255),
                         ),
                         child: Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
-                              0.0, 0.0, 0.0, 10.0),
-                          child: SingleChildScrollView(
-                            child: Column(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      10.0, 0.0, 10.0, 0.0),
-                                  child: Text(
-                                    'Una sinopsis otorga al lector o espectador un extracto de los aspectos más relevantes del asunto y le forma una visión general de una manera resumida y adecuada. La sinopsis por lo general no incluye una visión crítica del tema, sino que tiene como objetivo informar. Puede ser utilizada en trabajos e informes no funcionales, así también como en obras de ficción y creaciones multimedia.3​ También son usadas para resumir películas, obras de teatro o para las introducciones de los libros. Suelen ser encontradas al reverso de las películas, invitando al lector a comprarlos.4​ Las propias productoras de cine y televisión realizan avances, que son piezas cortas de pocos minutos o segundos de duración que presentan una sinopsis de la obra a estrenar como mera estrategia publicitaria.',
-                                    textAlign: TextAlign.justify,
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyText1
-                                        .override(
-                                          fontFamily: 'Poppins',
-                                          color: FlutterFlowTheme.of(context)
-                                              .black600,
-                                        ),
-                                  ),
+                              20.0, 25.0, 20.0, 0.0),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Color(0xFFF1F4F8),
+                              borderRadius: BorderRadius.circular(15),
+                              /*boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.5),
+                                  spreadRadius: 1,
+                                  blurRadius: 5,
+                                  offset: Offset(
+                                      0, 3), // changes position of shadow
                                 ),
-                              ],
+                              ],*/
+                            ),
+                            child: SingleChildScrollView(
+                              padding: EdgeInsets.all(10),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        10.0, 0.0, 10.0, 0.0),
+                                    child: Text(
+                                      widget.book.synopsis,
+                                      textAlign: TextAlign.justify,
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyText1
+                                          .override(
+                                            fontFamily: 'Poppins',
+                                            color: FlutterFlowTheme.of(context)
+                                                .black600,
+                                          ),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
@@ -193,11 +214,7 @@ class _ItemPageWidgetState extends State<ItemPageWidget> {
                 onPressed: () {
                   print('ButtonPrimary pressed ...');
                 },
-                text: 'Añadir a la cesta',
-                icon: Icon(
-                  Icons.add,
-                  size: 15.0,
-                ),
+                text: 'Comprar',
                 options: FFButtonOptions(
                   width: 300.0,
                   height: 60.0,

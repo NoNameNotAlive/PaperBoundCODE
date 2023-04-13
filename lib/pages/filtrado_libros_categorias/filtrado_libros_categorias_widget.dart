@@ -176,22 +176,30 @@ class _FiltradoLibrosCategoriasWidgetState
                       ],
                     ),
                   ),
-                  if (books == null)
-                    Center(
-                      child: Text('No hay libros disponibles'),
-                    )
-                  else
-                    SingleChildScrollView(
-                        child: Padding(
-                      padding: EdgeInsets.only(bottom: 20),
-                      child: ListView.builder(
-                        shrinkWrap: true,
-                        itemCount: books.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return BookCard(book: books[index]);
-                        },
-                      ),
-                    ))
+                  Expanded(
+                    child: ListView(
+                      padding: EdgeInsets.zero,
+                      scrollDirection: Axis.vertical,
+                      children: [
+                        if (books == null)
+                          Center(
+                            child: Text('No hay libros disponibles'),
+                          )
+                        else
+                          SingleChildScrollView(
+                              child: Padding(
+                            padding: EdgeInsets.only(bottom: 20),
+                            child: ListView.builder(
+                              shrinkWrap: true,
+                              itemCount: books.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                return BookCard(book: books[index]);
+                              },
+                            ),
+                          ))
+                      ],
+                    ),
+                  )
                 ],
               ),
             ),

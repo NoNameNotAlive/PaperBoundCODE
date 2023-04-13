@@ -1,43 +1,25 @@
-class Book {
-  final String title;
-  final String author;
-  final String imgUrl;
-  final String synopsis;
-  final int sale;
-  final double price;
+class Genre {
+  final String name;
+  final String img;
 
-  Book({
-    required this.title,
-    required this.author,
-    required this.imgUrl,
-    required this.synopsis,
-    required this.sale,
-    required this.price,
-  });
+  Genre({required this.name, required this.img});
 
-  factory Book.fromJson(Map<String, dynamic> json) {
-    return Book(
-      title: json['titol'],
-      author: json['nomAutor'],
-      imgUrl: json['urlImatge'],
-      synopsis: json['sinopsi'],
-      sale: json['descompte'],
-      price: json['preuTotal'],
-    );
+  factory Genre.fromJson(Map<String, dynamic> json) {
+    return Genre(name: json['nomGenere'], img: json['imgGenere']);
   }
 }
 
-class Books {
-  List<Book> books = [];
+class Genres {
+  List<Genre> genres = [];
 
-  Books();
+  Genres();
 
-  Books.fromJsonList(List<dynamic> jsonList) {
+  Genres.fromJsonList(List<dynamic> jsonList) {
     if (jsonList == null) return;
 
     for (var item in jsonList) {
-      final book = new Book.fromJson(item);
-      books.add(book);
+      final genre = new Genre.fromJson(item);
+      genres.add(genre);
     }
   }
 }
