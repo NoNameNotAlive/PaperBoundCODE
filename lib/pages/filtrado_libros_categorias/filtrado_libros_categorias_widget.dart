@@ -197,7 +197,15 @@ class _FiltradoLibrosCategoriasWidgetState
             ),
           );
         }
-        return CircularProgressIndicator();
+        return Center(
+          child: SizedBox(
+            width: 48.0,
+            height: 48.0,
+            child: CircularProgressIndicator(
+              valueColor: AlwaysStoppedAnimation<Color>(Colors.green),
+            ),
+          ),
+        );
       },
     );
   }
