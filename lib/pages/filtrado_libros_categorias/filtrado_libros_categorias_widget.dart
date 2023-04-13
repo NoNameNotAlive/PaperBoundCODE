@@ -197,7 +197,6 @@ class _FiltradoLibrosCategoriasWidgetState
             ),
           );
         }
-
         return CircularProgressIndicator();
       },
     );
