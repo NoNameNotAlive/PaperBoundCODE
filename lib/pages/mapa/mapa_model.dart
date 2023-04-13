@@ -1,17 +1,17 @@
-import '../flutter_flow/flutter_flow_theme.dart';
-import '../flutter_flow/flutter_flow_util.dart';
-import '../flutter_flow/flutter_flow_widgets.dart';
-import '../payment_modal/payment_modal_widget.dart';
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
+import 'package:geolocator/geolocator.dart';
 
-class MapaModel extends FlutterFlowModel {
-  /// Initialization and disposal methods.
+class Location {
+  double? longitude;
+  double? latitude;
 
-  void initState(BuildContext context) {}
-
-  void dispose() {}
-
-  /// Additional helper methods are added here.
+  Future<void> getCurrentLocation() async {
+    try {
+      Position position = await Geolocator.getCurrentPosition(
+          desiredAccuracy: LocationAccuracy.best);
+      longitude = position.longitude;
+      latitude = position.latitude;
+    } catch (e) {
+      print(e);
+    }
+  }
 }
