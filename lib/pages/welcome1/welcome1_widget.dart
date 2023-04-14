@@ -63,15 +63,18 @@ class _Welcome1WidgetState extends State<Welcome1Widget> {
                 fit: BoxFit.cover,
               ),
               Expanded(
-                child: Text(
-                  'Bienvenido a Paperbound, entra y empieza a recibir descuentos para el libro que más te guste.',
-                  textAlign: TextAlign.center,
-                  style: FlutterFlowTheme.of(context).bodyText2.override(
-                        fontFamily: 'Outfit',
-                        color: Color(0xFF57636C),
-                        fontSize: 14.0,
-                        fontWeight: FontWeight.normal,
-                      ),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Text(
+                    'Bienvenido a Paperbound, entra y empieza a recibir descuentos para el libro que más te guste.',
+                    textAlign: TextAlign.center,
+                    style: FlutterFlowTheme.of(context).bodyText2.override(
+                          fontFamily: 'Outfit',
+                          color: Color(0xFF57636C),
+                          fontSize: 14.0,
+                          fontWeight: FontWeight.normal,
+                        ),
+                  ),
                 ),
               ),
               Padding(
@@ -81,7 +84,7 @@ class _Welcome1WidgetState extends State<Welcome1Widget> {
                     await Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => LoginWidget(),
+                        builder: (context) => LoginPage(),
                       ),
                     );
                   },

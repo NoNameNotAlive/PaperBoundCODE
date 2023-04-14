@@ -60,7 +60,6 @@ class _FiltradoLibrosCategoriasWidgetState
               automaticallyImplyLeading: true,
               title: TextFormField(
                 controller: _model.textController,
-                autofocus: true,
                 obscureText: false,
                 decoration: InputDecoration(
                   hintText: 'Buscar Libro...',
@@ -99,27 +98,6 @@ class _FiltradoLibrosCategoriasWidgetState
                 style: FlutterFlowTheme.of(context).bodyText1,
                 validator: _model.textControllerValidator.asValidator(context),
               ),
-              actions: [
-                FlutterFlowIconButton(
-                  borderColor: Colors.transparent,
-                  borderRadius: 30.0,
-                  borderWidth: 1.0,
-                  buttonSize: 60.0,
-                  icon: Icon(
-                    Icons.shopping_cart_sharp,
-                    color: Colors.black,
-                    size: 30.0,
-                  ),
-                  onPressed: () async {
-                    await Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => CartViewWidget(),
-                      ),
-                    );
-                  },
-                ),
-              ],
               centerTitle: true,
               toolbarHeight: 100.0,
               elevation: 4.0,
