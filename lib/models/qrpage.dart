@@ -3,6 +3,7 @@ class QRPage {
 
   QRPage({
     required this.login,
+  });
 
   factory QRPage.fromJson(Map<String, dynamic> json) {
     return QRPage(
