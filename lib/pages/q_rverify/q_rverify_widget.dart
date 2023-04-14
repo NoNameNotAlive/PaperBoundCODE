@@ -1,3 +1,5 @@
+import 'package:paperbound/models/qrdata.dart';
+
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -11,7 +13,8 @@ import 'q_rverify_model.dart';
 export 'q_rverify_model.dart';
 
 class QRverifyWidget extends StatefulWidget {
-  const QRverifyWidget({Key? key}) : super(key: key);
+  final QRData qrdata;
+  const QRverifyWidget({Key? key, required this.qrdata}) : super(key: key);
 
   @override
   _QRverifyWidgetState createState() => _QRverifyWidgetState();
@@ -121,7 +124,7 @@ class _QRverifyWidgetState extends State<QRverifyWidget> {
                         padding: EdgeInsetsDirectional.fromSTEB(
                             20.0, 20.0, 20.0, 20.0),
                         child: BarcodeWidget(
-                          data: 'Jorge Javier : ',
+                          data: widget.qrdata.,
                           barcode: Barcode.qrCode(),
                           width: 100.0,
                           height: 100.0,
