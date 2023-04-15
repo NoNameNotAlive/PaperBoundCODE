@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import '../mapa/mapa_widget.dart';
 import 'item_page_model.dart';
 export 'item_page_model.dart';
 
@@ -211,8 +212,13 @@ class _ItemPageWidgetState extends State<ItemPageWidget> {
             Padding(
               padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 24.0),
               child: FFButtonWidget(
-                onPressed: () {
-                  print('ButtonPrimary pressed ...');
+                onPressed: () async {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => MapaWidget(),
+                    ),
+                  );
                 },
                 text: 'Comprar',
                 options: FFButtonOptions(
