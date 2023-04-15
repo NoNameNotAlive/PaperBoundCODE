@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import '../login/login_widget.dart';
 import 'register1_model.dart';
 export 'register1_model.dart';
 
@@ -94,18 +95,21 @@ class _Register1WidgetState extends State<Register1Widget> {
                       style: textFormFieldTextStyle,
                       decoration: textFormFieldStyle.copyWith(
                           hintText: 'Repita la contraseña'),
+                      obscureText: true,
                     ),
                     SizedBox(height: 16.0),
                     FFButtonWidget(
                       onPressed: () async {
                         String email = _emailController.text;
                         String password = _passwordController.text;
-                        if (await _loginProvider.login(email, password) ==
+                        String repeatedPsswd = _repeatpasswordController.text;
+                        if (await _loginProvider.register(
+                                email, password, repeatedPsswd) ==
                             true) {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => CategoriesWidget(),
+                              builder: (context) => LoginPage(),
                             ),
                           );
                         }

@@ -40,14 +40,6 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      scrollBehavior: MaterialScrollBehavior().copyWith(
-        dragDevices: {
-          PointerDeviceKind.mouse,
-          PointerDeviceKind.touch,
-          PointerDeviceKind.stylus,
-          PointerDeviceKind.unknown
-        },
-      ),
       title: 'Paperbound',
       localizationsDelegates: [
         FFLocalizationsDelegate(),
@@ -63,4 +55,12 @@ class _MyAppState extends State<MyApp> {
       home: SplashWidget(),
     );
   }
+}
+
+class MyCustomScrollBehavior extends MaterialScrollBehavior {
+  @override
+  Set<PointerDeviceKind> get dragDevices => {
+        PointerDeviceKind.touch,
+        PointerDeviceKind.mouse,
+      };
 }

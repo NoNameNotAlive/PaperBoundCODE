@@ -28,6 +28,7 @@ class _FiltradoLibrosCategoriasWidgetState
 
   final BookProvider bookProvider = new BookProvider();
   late List<Book> bookList = [];
+  TextEditingController _controller = TextEditingController();
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -49,10 +50,11 @@ class _FiltradoLibrosCategoriasWidgetState
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<Book>>(
-      future: bookProvider.getBooksByGenre(widget.genre),
+      future: bookProvider.getBooksByGenre(
+          widget.genre, _model.textController.text),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          final books = snapshot.data;
+          List<Book>? books = snapshot.data;
           return Scaffold(
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
             appBar: AppBar(
@@ -96,6 +98,11 @@ class _FiltradoLibrosCategoriasWidgetState
                   fillColor: Color(0x9EE0E3E7),
                 ),
                 style: FlutterFlowTheme.of(context).bodyText1,
+                onChanged: (value) async => {
+                  books =
+                      await bookProvider.getBooksByGenre(widget.genre, value),
+                  setState(() {})
+                },
                 validator: _model.textControllerValidator.asValidator(context),
               ),
               centerTitle: true,
@@ -158,23 +165,19 @@ class _FiltradoLibrosCategoriasWidgetState
                     child: ListView(
                       padding: EdgeInsets.zero,
                       scrollDirection: Axis.vertical,
+                      shrinkWrap: true, // Agrega esta propiedad
                       children: [
-                        if (books == null)
-                          Center(
-                            child: Text('No hay libros disponibles'),
-                          )
-                        else
-                          SingleChildScrollView(
-                              child: Padding(
-                            padding: EdgeInsets.only(bottom: 20),
-                            child: ListView.builder(
-                              shrinkWrap: true,
-                              itemCount: books.length,
-                              itemBuilder: (BuildContext context, int index) {
-                                return BookCard(book: books[index]);
-                              },
-                            ),
-                          ))
+                        books == null
+                            ? Center(
+                                child: Text('No hay libros disponibles'),
+                              )
+                            : ListView.builder(
+                                shrinkWrap: true,
+                                itemCount: books?.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return BookCard(book: books![index]);
+                                },
+                              ),
                       ],
                     ),
                   )

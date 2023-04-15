@@ -7,14 +7,28 @@ import '../models/genre.dart';
 
 class LoginProvider {
   // Flutter no coincibe localhost, con lo que he utilizado ngrok
-  String _url = 'https://1179-80-29-126-239.ngrok-free.app/api';
+  String _url = 'https://7ffc-92-178-171-68.ngrok-free.app/api';
 
-  Future<bool> register() async {
-    final url = Uri.parse(_url + '/Generes');
+  Future<bool> register(
+      String login, String password, String repeatedPsswd) async {
+    if (password != repeatedPsswd) {
+      return false;
+    }
+    final url = Uri.parse(_url + '/Usuaris/Register');
 
-    debugPrint('url: $url');
+    Map data = {"user": login, "password": password};
 
-    return true;
+    var body = json.encode(data);
+
+    final response = await http.post(url, body: body, headers: {
+      "ngrok-skip-browser-warning": "69420",
+      "Content-Type": "application/json"
+    });
+
+    debugPrint('post: $url');
+    final decodedData = json.decode(response.body);
+
+    return decodedData != null ? true : false;
   }
 
   Future<bool> login(String login, String password) async {
