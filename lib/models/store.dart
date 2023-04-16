@@ -1,8 +1,10 @@
 class Store {
+  final int idPuntRecollida;
   final String name;
   final String latitude;
   final String length;
   Store({
+    required this.idPuntRecollida,
     required this.name,
     required this.latitude,
     required this.length,
@@ -10,6 +12,7 @@ class Store {
 
   factory Store.fromJson(Map<String, dynamic> json) {
     return Store(
+      idPuntRecollida: json['idPuntRecollida'],
       name: json['nombre'],
       latitude: json['latitud'],
       length: json['longitud'],

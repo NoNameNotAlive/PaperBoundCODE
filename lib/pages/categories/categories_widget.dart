@@ -83,7 +83,10 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
               mainAxisSize: MainAxisSize.max,
               children: [
                 Expanded(
+                    child: ConstrainedBox(
+                  constraints: const BoxConstraints.expand(),
                   child: ListView(
+                    shrinkWrap: true,
                     padding: EdgeInsets.zero,
                     scrollDirection: Axis.vertical,
                     children: [
@@ -106,6 +109,7 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
                               child: Text('No hay géneros disponibles'),
                             )
                           : ListView.builder(
+                              physics: NeverScrollableScrollPhysics(),
                               shrinkWrap: true,
                               itemCount: genres.length,
                               itemBuilder: (BuildContext context, int index) {
@@ -114,7 +118,7 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
                             ),
                     ],
                   ),
-                ),
+                )),
               ],
             ),
           );

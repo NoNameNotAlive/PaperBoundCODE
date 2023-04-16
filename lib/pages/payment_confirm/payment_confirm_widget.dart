@@ -58,14 +58,7 @@ class _PaymentConfirmWidgetState extends State<PaymentConfirmWidget> {
                       color: Colors.white,
                       size: 20.0,
                     ),
-                    onPressed: () async {
-                      await Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => QRverifyWidget(),
-                        ),
-                      );
-                    },
+                    onPressed: () async {},
                   ),
                 ],
               ),

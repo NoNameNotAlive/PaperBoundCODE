@@ -172,6 +172,7 @@ class _FiltradoLibrosCategoriasWidgetState
                                 child: Text('No hay libros disponibles'),
                               )
                             : ListView.builder(
+                                physics: NeverScrollableScrollPhysics(),
                                 shrinkWrap: true,
                                 itemCount: books?.length,
                                 itemBuilder: (BuildContext context, int index) {

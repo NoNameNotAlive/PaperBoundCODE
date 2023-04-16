@@ -216,7 +216,9 @@ class _ItemPageWidgetState extends State<ItemPageWidget> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => MapaWidget(),
+                      builder: (context) => MapaWidget(
+                        idBook: widget.book.idLlibre,
+                      ),
                     ),
                   );
                 },

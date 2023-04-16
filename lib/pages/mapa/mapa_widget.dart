@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter/material.dart';
 import 'package:latlong2/latlong.dart' as latlong;
+import 'package:paperbound/index.dart';
 import 'package:paperbound/models/store.dart';
 import '../../provider/StoreProvider.dart';
 import '../cart_view/cart_view_widget.dart';
@@ -10,7 +11,12 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import 'package:paperbound/pages/mapa/mapa_model.dart';
 
+import '../flutter_flow/flutter_flow_widgets.dart';
+
 class MapaWidget extends StatefulWidget {
+  final int idBook;
+  const MapaWidget({Key? key, required this.idBook}) : super(key: key);
+
   @override
   _MapaWidgetState createState() => _MapaWidgetState();
 }
@@ -56,7 +62,7 @@ class _MapaWidgetState extends State<MapaWidget> {
           style: FlutterFlowTheme.of(context).bodyText1.override(
                 fontFamily: 'Poppins',
                 fontSize: 24.0,
-                color: Color.fromARGB(255, 255, 255, 255),
+                color: Color.fromARGB(255, 0, 0, 0),
               ),
         ),
         centerTitle: true,
@@ -108,15 +114,67 @@ class _MapaWidgetState extends State<MapaWidget> {
                                               children: [
                                                 ListTile(
                                                   title: Text(markerData.name),
-                                                  subtitle:
-                                                      Text(markerData.name),
                                                   leading: Icon(Icons.map),
                                                 ),
                                                 Padding(
                                                   padding:
                                                       const EdgeInsets.all(8.0),
-                                                  child: Text(
-                                                      'Contenido de la tarjeta'),
+                                                  child: FFButtonWidget(
+                                                    onPressed: () async {
+                                                      Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              QRverifyWidget(
+                                                            idBook:
+                                                                widget.idBook,
+                                                            idMap: markerData
+                                                                .idPuntRecollida,
+                                                          ),
+                                                        ),
+                                                      );
+                                                    },
+                                                    text: 'Generar tu código',
+                                                    options: FFButtonOptions(
+                                                      width: 300.0,
+                                                      height: 50.0,
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  0.0,
+                                                                  0.0,
+                                                                  0.0,
+                                                                  0.0),
+                                                      iconPadding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  0.0,
+                                                                  0.0,
+                                                                  0.0,
+                                                                  0.0),
+                                                      color: Color(0xFFB4FFA8),
+                                                      textStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .subtitle2
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Outfit',
+                                                                color: Color(
+                                                                    0xFF0F1113),
+                                                                fontSize: 16.0,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .normal,
+                                                              ),
+                                                      elevation: 2.0,
+                                                      borderSide: BorderSide(
+                                                        color:
+                                                            Colors.transparent,
+                                                        width: 1.0,
+                                                      ),
+                                                    ),
+                                                  ),
                                                 ),
                                               ],
                                             ),
@@ -126,7 +184,7 @@ class _MapaWidgetState extends State<MapaWidget> {
                                     },
                                     child: Icon(
                                       Icons.location_on,
-                                      color: Colors.red,
+                                      color: Color.fromARGB(255, 218, 77, 22),
                                       size: 50,
                                     ),
                                   ),
@@ -141,8 +199,8 @@ class _MapaWidgetState extends State<MapaWidget> {
                         builder: (ctx) => Container(
                                 child: Container(
                               child: Icon(
-                                Icons.accessibility_new,
-                                color: Color.fromARGB(255, 247, 15, 15),
+                                Icons.adjust_rounded,
+                                color: Color.fromARGB(255, 218, 77, 22),
                                 size: 40,
                               ),
                             ))),

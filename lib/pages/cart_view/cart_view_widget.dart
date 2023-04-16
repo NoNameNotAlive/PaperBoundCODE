@@ -322,14 +322,7 @@ class _CartViewWidgetState extends State<CartViewWidget> {
                 ),
               ),
               FFButtonWidget(
-                onPressed: () async {
-                  await Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => MapaWidget(),
-                    ),
-                  );
-                },
+                onPressed: () async {},
                 text: 'COMPRAR',
                 icon: Icon(
                   Icons.payment,
